@@ -2,7 +2,8 @@
 data "azurerm_client_config" "current" {}
 
 resource "azurerm_key_vault" "kv-asda" {
-  name                        = "kv-${var.business_unit}-${var.environment}-${random_string.random.id}"
+  //name                        = "kv-${var.business_unit}-${var.environment}-${random_string.random.id}"
+  name                        = "kv-${var.business_unit}-${var.environment}-001"
   location                    = azurerm_resource_group.rg-asda.location
   resource_group_name         = azurerm_resource_group.rg-asda.name
   enabled_for_disk_encryption = true

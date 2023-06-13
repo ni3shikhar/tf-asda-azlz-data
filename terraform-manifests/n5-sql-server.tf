@@ -31,19 +31,19 @@ resource "azurerm_mssql_server_transparent_data_encryption" "sql-tde" {
 
 
 #Start of auditing - enable sql server auditing
-resource "azurerm_monitor_diagnostic_setting" "diag-asda" {
+/*resource "azurerm_monitor_diagnostic_setting" "diag-asda" {
   name                       = "ds-settings-1"
   target_resource_id         = "${azurerm_mssql_server.sql-asda.id}"
   log_analytics_workspace_id = azurerm_log_analytics_workspace.la-asda.id
 
-  /*enabled_log {
+  enabled_log {
     category = "AuditEvent"
     enabled  = true
 
     retention_policy {
       enabled = false
     }
-  }*/
+  }
 
   metric {
     category = "AllMetrics"
@@ -68,6 +68,7 @@ resource "azurerm_mssql_server_extended_auditing_policy" "audit-asda1" {
   log_monitoring_enabled = true
 }
 #End of auditing block
+*/
 
 #create virtual network rule for sql server
 resource "azurerm_mssql_virtual_network_rule" "sql-vnet-rule1" {

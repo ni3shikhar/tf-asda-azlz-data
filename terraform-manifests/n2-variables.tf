@@ -4,7 +4,7 @@
 variable "business_unit" {
   description = "Business Unit Name"
   type = string
-  default = "crw"
+  default = "slft"
 }
 # 2. Environment Name
 variable "environment" {
@@ -24,21 +24,21 @@ variable "resoure_group_location" {
 variable "vnet_address_space_asda" {
   description = "Virtual Network Address Space for Dev Environment"
   type = list(string)
-  default = [ "10.0.0.0/16" ]
+  default = [ "10.1.0.0/16" ]
 }
 
 # 13. core subnet
 variable "asda_subent_address_prefix" {
   description = "D365 subnet address prefix"
   type = list(string)
-  default = [ "10.0.1.0/24" ]
+  default = [ "10.1.1.0/24" ]
 }
 
 # 13. Privateendpoint core subnet
 variable "pe_subent_address_prefix" {
   description = "D365 subnet address prefix"
   type = list(string)
-  default = [ "10.0.2.0/24" ]
+  default = [ "10.1.2.0/24" ]
 }
 
 #Azure MS SQL Azure Admin Username
@@ -60,4 +60,12 @@ variable "aas_admins" {
   description = "Azure Analysis Service Server Adminstrators"
   type = list(string)
   default = [ "nitin.shikhare@kadamorg.onmicrosoft.com" ] #define this as a sensitive variable.
+}
+
+#SHIR VM password
+variable "pwd_shir" {
+  description = "SHIR VM password"
+  type = string
+  sensitive = true
+  default = "P@ssw0rd1234"
 }
