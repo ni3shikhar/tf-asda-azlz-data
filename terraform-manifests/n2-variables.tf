@@ -69,3 +69,10 @@ variable "pwd_shir" {
   sensitive = true
   default = "P@ssw0rd1234"
 }
+
+#Azure firewall flag
+variable "var_firewall_data" {
+  description = "firewall flag"
+  type = string
+  default = "NO"
+}

@@ -1,6 +1,7 @@
 resource "azurerm_firewall_policy_rule_collection_group" "fw-rcgs-shared" {
+  count = var.var_firewall_data == "YES" ? 1 : 0
   name               = "rcg-${var.business_unit}-shared"
-  firewall_policy_id = module.asda_azlz_shared_services.output_azure_fw_policy_id
+  firewall_policy_id = "${module.asda_azlz_shared_services.output_azure_fw_policy_id[count.index]}"
   priority           = 4000
   application_rule_collection {
     name     = "rcg-${var.business_unit}-shared"

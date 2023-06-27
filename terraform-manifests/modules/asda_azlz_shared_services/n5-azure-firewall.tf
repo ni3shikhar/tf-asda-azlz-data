@@ -10,6 +10,7 @@ resource "azurerm_subnet" "snet-firwall" {
 }
 
 resource "azurerm_public_ip" "pip-firewall" {
+  count = var.var_firewall == "YES" ? 1 : 0
   name                = "pip-firewall"
   location            = azurerm_resource_group.rg-asda-shared.location
   resource_group_name = azurerm_resource_group.rg-asda-shared.name
@@ -28,13 +29,14 @@ resource "azurerm_firewall" "fw-shared" {
     ip_configuration {
         name                 = "configuration"
         subnet_id            = azurerm_subnet.snet-firwall[count.index].id
-        public_ip_address_id = azurerm_public_ip.pip-firewall.id
+        public_ip_address_id = azurerm_public_ip.pip-firewall[0].id
     }
-    firewall_policy_id = azurerm_firewall_policy.fwpolicy-shared.id
+    firewall_policy_id = azurerm_firewall_policy.fwpolicy-shared[count.index].id
 }
 
 #create azure policy
 resource "azurerm_firewall_policy" "fwpolicy-shared" {
+  count = var.var_firewall == "YES" ? 1 : 0
   name                = "fwpolicy-${var.business_unit}-${var.resoure_group_location}"
   resource_group_name = azurerm_resource_group.rg-asda-shared.name
   location            = azurerm_resource_group.rg-asda-shared.location

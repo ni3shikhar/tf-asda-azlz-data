@@ -8,7 +8,7 @@ resource "azurerm_subnet" "snet-bastion" {
 }
 
 resource "azurerm_public_ip" "pip-bastion" {
-    //count = var.var_bastion == "YES" ? 1 : 0
+    count = var.var_bastion == "YES" ? 1 : 0
     name                = "pip-bastion"
     location            = azurerm_resource_group.rg-asda-shared.location
     resource_group_name = azurerm_resource_group.rg-asda-shared.name
@@ -26,7 +26,7 @@ resource "azurerm_bastion_host" "bastion-shared" {
     ip_configuration {
         name                 = "configuration"
         subnet_id            = azurerm_subnet.snet-bastion[count.index].id
-        public_ip_address_id = azurerm_public_ip.pip-bastion.id
+        public_ip_address_id = azurerm_public_ip.pip-bastion[count.index].id
   }
   depends_on = [ azurerm_subnet.snet-bastion ]
 }
