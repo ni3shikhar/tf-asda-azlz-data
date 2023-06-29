@@ -6,7 +6,7 @@ resource "azurerm_ip_group" "ipg-data" {
 
   cidrs = var.asda_subent_address_prefix
 
-  depends_on = [  ]
+  //depends_on = [  ]
 
   /*tags = {
     environment = "Production"

@@ -4,8 +4,8 @@ resource "null_resource" "previous" {}
 
 resource "time_sleep" "wait_300_seconds" {
   create_duration = "300s"
-  depends_on = [  ]
-}*/
+  depends_on = [ azurerm_firewall_policy_rule_collection_group.fw-rcgs-shared ]
+}
 
 /* This resource will create (at least) 30 seconds after null_resource.previous
 resource "null_resource" "next" {

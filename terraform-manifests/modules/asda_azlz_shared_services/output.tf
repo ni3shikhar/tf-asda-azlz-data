@@ -1,10 +1,3 @@
-#id of the firewall public ip address
-output "output_firewall_ip_address" {
-  //value = azurerm_public_ip.pip-firewall[0].id
-  // = var.var_firewall == "YES" ? azurerm_public_ip.pip-firewall[0].id : azurerm_public_ip.pip-firewall[0].id //azurerm_firewall[0].fw-shared.ip_configuration[0].private_ip_address
-  value = "${azurerm_public_ip.pip-firewall.*.id}"
-}
-
 #id of the shared services vnet
 output "output_shared_core_subnet_id" {
   value = azurerm_subnet.snet-core-shared.id
@@ -26,24 +19,10 @@ output "output_vnet_cidr" {
 }
 
 #resource group name of the shared environment
-output "output_rg-asda-shared" {
+output "rg-asda-shared-name" {
   value = azurerm_resource_group.rg-asda-shared.name
 }
 
-#IP address of the azure firewall
-output "output_pip_azurefirewall" {
-  description = "Public ip address of the Azure firewall."
-  //value = azurerm_public_ip.pip-firewall[0].ip_address
-  //value = var.var_firewall == "YES" ? azurerm_public_ip.pip-firewall[0].ip_address : ""
-  value = "${azurerm_public_ip.pip-firewall.*.ip_address}"
-}
-#IP address of the azure firewall
-output "output_privateip_azurefirewall" {
-  //count = var.var_firewall == "YES" ? 1 : 0
-  description = "Private ip address of the Azure firewall."
-  value = var.var_firewall == "YES" ? azurerm_firewall.fw-shared[1].ip_configuration[0].private_ip_address : ""
-  //value = "${azurerm_firewall.fw-shared[0].ip_configuration[0].private_ip_address}"
-}
 
 #Azure firewall policy id
 output "output_azure_fw_policy_id" {
@@ -67,6 +46,33 @@ output "output_ip_group_cidrs_shared" {
 output "output_ip_group_id_shared" {
   value = azurerm_ip_group.ipg-shared.id
 }
+
+output "firewall_id" {
+  description = "Firewall generated id"
+  value       = azurerm_firewall.fw-shared[*].id
+}
+
+output "firewall_name" {
+  description = "Firewall name"
+  value       = azurerm_firewall.fw-shared[*].name
+}
+
+output "subnet_id" {
+  description = "ID of the subnet attached to the firewall"
+  value       = azurerm_firewall.fw-shared[*].ip_configuration[0].subnet_id
+}
+
+output "private_ip_address" {
+  description = "Firewall private IP"
+  value       = azurerm_firewall.fw-shared[*].ip_configuration[0].private_ip_address
+}
+
+output "public_ip_address" {
+  description = "Firewall public IP"
+  value       = azurerm_public_ip.pip-firewall[*].ip_address
+}
+
+
 
 
 

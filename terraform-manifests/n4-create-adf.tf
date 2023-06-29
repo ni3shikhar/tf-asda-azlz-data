@@ -18,6 +18,11 @@ resource "azurerm_data_factory" "adf-asda" {
   //Add diagnostics settings    
 }
 
+resource "azurerm_data_factory_integration_runtime_self_hosted" "shir_adf_data" {
+  name            = "shir${var.business_unit}${var.environment}"
+  data_factory_id = azurerm_data_factory.adf-asda.id
+}
+
 data "azuread_service_principal" "data_factory_managed_identity" {
   #object_id = azurerm_data_factory.df.identity.0.principal_id
   display_name =  "adf-${var.business_unit}-${var.environment}"
@@ -58,3 +63,18 @@ resource "azurerm_data_factory_managed_private_endpoint" "mpe-sql" {
   target_resource_id = azurerm_mssql_server.sql-asda.id
   subresource_name   = "sqlServer"
 }
+
+resource "azurerm_data_factory_linked_service_key_vault" "ls-adf-kv" {
+  name            = "LS-KV"
+  data_factory_id = azurerm_data_factory.adf-asda.id
+  key_vault_id    = azurerm_key_vault.kv-asda.id
+  depends_on = [ azurerm_data_factory_managed_private_endpoint.mpe-kv ]
+}
+/*
+resource "azurerm_data_factory_linked_service_sql_server" "ls-adf-sql-server" {
+  name              = "LS-SQL-DB"
+  data_factory_id   = azurerm_data_factory.adf-asda.id
+  connection_string = "Integrated Security=False;Data Source=test;Initial Catalog=test;User ID=test;Password=test"
+  depends_on = [ azurerm_data_factory_managed_private_endpoint.mpe-sql ]
+}*/
+

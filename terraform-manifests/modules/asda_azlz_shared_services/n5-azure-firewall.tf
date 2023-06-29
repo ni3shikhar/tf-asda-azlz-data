@@ -40,6 +40,8 @@ resource "azurerm_firewall_policy" "fwpolicy-shared" {
   name                = "fwpolicy-${var.business_unit}-${var.resoure_group_location}"
   resource_group_name = azurerm_resource_group.rg-asda-shared.name
   location            = azurerm_resource_group.rg-asda-shared.location
+
+  depends_on = [ azurerm_ip_group.ipg-shared ]
 }
 
 #create shared ip group

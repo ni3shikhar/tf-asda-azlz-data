@@ -12,25 +12,25 @@ resource "azurerm_route_table" "rt-spoke-asda" {
     name           = "route-to-internet"
     address_prefix = "0.0.0.0/0"
     next_hop_type  = "VirtualAppliance"
-    next_hop_in_ip_address = module.asda_azlz_shared_services.output_privateip_azurefirewall
+    next_hop_in_ip_address = module.asda_azlz_shared_services.private_ip_address[0]
   }
   route {
     name           = "RFC_1918_10"
     address_prefix = "10.0.0.0/8"
     next_hop_type  = "VirtualAppliance"
-    next_hop_in_ip_address = module.asda_azlz_shared_services.output_privateip_azurefirewall
+    next_hop_in_ip_address = module.asda_azlz_shared_services.private_ip_address[0]
   }
   route {
     name           = "RFC_1918_172"
     address_prefix = "172.16.0.0/12"
     next_hop_type  = "VirtualAppliance"
-    next_hop_in_ip_address = module.asda_azlz_shared_services.output_privateip_azurefirewall
+    next_hop_in_ip_address = module.asda_azlz_shared_services.private_ip_address[0]
   }
   route {
     name           = "RFC_1918_192"
     address_prefix = "192.168.0.0/16"
     next_hop_type  = "VirtualAppliance"
-    next_hop_in_ip_address = module.asda_azlz_shared_services.output_privateip_azurefirewall
+    next_hop_in_ip_address = module.asda_azlz_shared_services.private_ip_address[0]
   }
 
   /*tags = {

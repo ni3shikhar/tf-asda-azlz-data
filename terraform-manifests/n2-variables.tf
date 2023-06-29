@@ -45,21 +45,24 @@ variable "pe_subent_address_prefix" {
 variable "name_azure_sql_server_admin" {
   description = "Username of the MS SQL Server Administrator"
   type = string
-  default = "nitin.shikhare@kadamorg.onmicrosoft.com" //pass this as inline parameter while deployment
+  //default = "nitin.shikhare@kadamorg.onmicrosoft.com" //pass this as inline parameter while deployment
+  default = "nitin.shikhare@shikhareorg.onmicrosoft.com"
 }
 
 #Azure MS SQL Azure Admin Object ID
 variable "id_azure_sql_server_admin" {
   description = "Object ID of the MS SQL Server Administrator"
   type = string
-  default = "db2f7ba0-dca2-48b1-8083-374f235d1e10" //pass this as inline parameter while deployment
+  //default = "db2f7ba0-dca2-48b1-8083-374f235d1e10" //pass this as inline parameter while deployment
+  default = "9d78b34f-d75a-4468-95ba-1d76fa0446a6" //shikhareorg
 }
 
 #Azure Analysis Service Server Adminstrators
 variable "aas_admins" {
   description = "Azure Analysis Service Server Adminstrators"
   type = list(string)
-  default = [ "nitin.shikhare@kadamorg.onmicrosoft.com" ] #define this as a sensitive variable.
+  //default = [ "nitin.shikhare@kadamorg.onmicrosoft.com" ] #define this as a sensitive variable.
+  default = [ "nitin.shikhare@shikhareorg.onmicrosoft.com" ] #define this as a sensitive variable.
 }
 
 #SHIR VM password

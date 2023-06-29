@@ -12,7 +12,7 @@ resource "azurerm_virtual_network_peering" "spoke-to-shared" {
 
 resource "azurerm_virtual_network_peering" "shared-to-spoke" {
   name                      = "peering-shared-to-${var.environment}"
-  resource_group_name       = module.asda_azlz_shared_services.output_rg-asda-shared
+  resource_group_name       = module.asda_azlz_shared_services.rg-asda-shared-name
   virtual_network_name      = module.asda_azlz_shared_services.output_vnet-asda-shared_name
   remote_virtual_network_id = azurerm_virtual_network.vnet-asda.id
   allow_virtual_network_access = true

@@ -33,27 +33,6 @@ resource "azurerm_subnet" "snet-privateendpoints" {
   service_endpoints    = ["Microsoft.Storage","Microsoft.KeyVault","Microsoft.Sql"]
 }
 
-#create storage account for dev activities
-resource "azurerm_storage_account" "stg-asda" {
-  name                     = "stglog${var.business_unit}${var.environment}${random_string.random.id}"
-  resource_group_name      = azurerm_resource_group.rg-asda.name
-  location                 = azurerm_resource_group.rg-asda.location
-  account_tier             = "Standard"
-  account_replication_type = "LRS"
-  #public_network_access_enabled = true 
-
-  network_rules {
-    default_action             = "Deny"
-    ip_rules                   = ["159.246.20.2","159.246.40.2"]
-    virtual_network_subnet_ids = [azurerm_subnet.snet-core.id,azurerm_subnet.snet-privateendpoints.id]
-    bypass                     = ["Metrics"]
-  }
-
-  /*tags = {
-    environment = "staging"
-  }*/
-}
-
 /*
 #create storage account netowrk firewall rules
 resource "azurerm_storage_account_network_rules" "example" {
