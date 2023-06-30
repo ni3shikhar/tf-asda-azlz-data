@@ -70,11 +70,11 @@ resource "azurerm_data_factory_linked_service_key_vault" "ls-adf-kv" {
   key_vault_id    = azurerm_key_vault.kv-asda.id
   depends_on = [ azurerm_data_factory_managed_private_endpoint.mpe-kv ]
 }
-/*
-resource "azurerm_data_factory_linked_service_sql_server" "ls-adf-sql-server" {
+
+resource "azurerm_data_factory_linked_service_azure_sql_database" "ls-adf-sql-db" {
   name              = "LS-SQL-DB"
   data_factory_id   = azurerm_data_factory.adf-asda.id
-  connection_string = "Integrated Security=False;Data Source=test;Initial Catalog=test;User ID=test;Password=test"
+  connection_string = "data source=sql-dwh-slft.database.windows.net;Initial Catalog=sqldb-slft-dev;Persist Security Info=False;User ID=mradministrator;Password=thisIsDog11;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30"
   depends_on = [ azurerm_data_factory_managed_private_endpoint.mpe-sql ]
-}*/
+}
 

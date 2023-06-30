@@ -23,10 +23,10 @@ data "azurerm_storage_account" "data-stg-data" {
   name                = "stglog${var.business_unit}${var.environment}${random_string.random.id}"
   resource_group_name = azurerm_resource_group.rg-asda.name
 }
-
+/*
 resource "azurerm_data_factory_linked_service_azure_blob_storage" "ls-stg" {
   name              = "LS-BLOB-STORAGE"
   data_factory_id   = azurerm_data_factory.adf-asda.id
   //connection_string = data.azurerm_storage_account.data-stg-data.primary_connection_string
-}
+}*/
 
