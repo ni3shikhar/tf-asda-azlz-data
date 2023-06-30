@@ -74,7 +74,7 @@ resource "azurerm_data_factory_linked_service_key_vault" "ls-adf-kv" {
 resource "azurerm_data_factory_linked_service_azure_sql_database" "ls-adf-sql-db" {
   name              = "LS-SQL-DB"
   data_factory_id   = azurerm_data_factory.adf-asda.id
-  connection_string = "data source=sql-dwh-slft.database.windows.net;Initial Catalog=sqldb-slft-dev;Persist Security Info=False;User ID=mradministrator;Password=thisIsDog11;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30"
+  connection_string = "data source=sql-dwh-slft.database.windows.net;Initial Catalog=sqldb-slft-dev;Persist Security Info=False;User ID=mradministrator;Password={passwprd};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30"
   depends_on = [ azurerm_data_factory_managed_private_endpoint.mpe-sql ]
 }
 
